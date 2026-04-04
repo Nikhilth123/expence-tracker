@@ -4,3 +4,4 @@ const router=express.Router();
 router.post('/login',handlelogin);
 router.post('/signup',handlesignup);
 router.get('/logout',handlelogout);
+export default router;
