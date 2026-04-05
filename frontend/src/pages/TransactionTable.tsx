@@ -22,7 +22,7 @@ import {
 
 import { Trash2 } from "lucide-react";
 
-
+import {type Transaction } from "../context/transactioncontext";
 
 import { useTransaction } from "../Hooks/usetransaction";
 export default function TransactionTable() {
@@ -36,7 +36,7 @@ export default function TransactionTable() {
     };
     const  data=transactions;
   
-  const filteredData = data.filter((tx) => {
+  const filteredData = data.filter((tx: Transaction) => {
     const matchesSearch = tx.category
       .toLowerCase()
       .includes(search.toLowerCase());

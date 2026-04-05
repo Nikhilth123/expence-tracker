@@ -1,9 +1,9 @@
 // context/useTransaction.ts
 
 import { useContext } from "react";
-import { TransactionContext } from "../context/Transactioncontext";
+import {type TransactionContextType, TransactionContext } from "../context/transactioncontext";
 
-export const useTransaction = () => {
+export const useTransaction = ():TransactionContextType => {
   const context = useContext(TransactionContext);
 
   if (!context) {

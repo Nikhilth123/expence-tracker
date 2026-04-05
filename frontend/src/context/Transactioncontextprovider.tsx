@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   type Transaction,
   TransactionContext,
-} from "./Transactioncontext";
+} from "./transactioncontext";
 
 export const TransactionProvider = ({ children }: any) => {
   const [transactions, setTransactions] = useState<Transaction[]>([
