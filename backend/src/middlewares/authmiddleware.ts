@@ -9,6 +9,7 @@ interface JwtPayload {
 }
 export interface Authrequest extends Request {
   user?: any;
+  cookies:any;
 }
 const protect = (req:Authrequest, res:Response, next:NextFunction) => {
  const token=req.cookies.token;
