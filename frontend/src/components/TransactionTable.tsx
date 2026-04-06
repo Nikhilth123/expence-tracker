@@ -33,7 +33,7 @@ import { Trash2 } from "lucide-react";
 
 
 import { useTransaction } from "../Hooks/usetransaction";
-export default function TransactionTable() {
+export default function TransactionTable({ refreshAnalytics }: any) {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [fromDate, setFromDate] = useState("");
@@ -99,6 +99,7 @@ export default function TransactionTable() {
           const data =await res.json();
           console.log(data);
           deleteTransaction(id);
+          await refreshAnalytics();
                  console.log("Transaction deleted successfully");
         }
       }

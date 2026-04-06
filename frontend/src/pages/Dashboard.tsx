@@ -71,7 +71,7 @@ export default function Dashboard() {
       });
       const data = await res.json();
       addTransaction(data.transaction);
-navigate('/dashboard');
+await getanalyticsdata();
     } catch (error) {
       console.error("Error adding transaction:", error);
     }
@@ -258,7 +258,7 @@ navigate('/dashboard');
 
       
       <div className="flex justify-end py-4">
-        <AddTransactionModal onAdd={handleAddTransaction} />
+        <AddTransactionModal onAdd={handleAddTransaction}  />
       </div>
 
   
@@ -269,7 +269,7 @@ navigate('/dashboard');
             <CardTitle>Recent Transactions</CardTitle>
           </CardHeader>
           <CardContent>
-            <TransactionTable />
+            <TransactionTable refreshAnalytics={getanalyticsdata} />
           </CardContent>
         </Card>
       </div>
