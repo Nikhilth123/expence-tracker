@@ -3,7 +3,7 @@ import { Transaction } from "../model/transaction";
 import { Authrequest } from "../middlewares/authmiddleware";
 export const getDashboardData = async (req: Authrequest, res: Response) => {
   try {
-    const userId = req.user?.id; // assuming auth middleware
+    const userId = req.user?.id; 
     const { range } = req.query;
 
     const now = new Date();
@@ -12,16 +12,16 @@ export const getDashboardData = async (req: Authrequest, res: Response) => {
 
    
     if (range === "weekly") {
-      const day = now.getDay(); // 0 (Sun) → 6 (Sat)
-      const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Monday start
+      const day = now.getDay(); 
+      const diff = now.getDate() - day + (day === 0 ? -6 : 1); 
       startDate = new Date(now.setDate(diff));
       startDate.setHours(0, 0, 0, 0);
     } 
     else if (range === "monthly") {
-      startDate = new Date(now.getFullYear(), 0, 1); // Jan 1
+      startDate = new Date(now.getFullYear(), 0, 1); 
     } 
     else {
-      startDate = new Date(now.getFullYear() - 4, 0, 1); // last 5 years
+      startDate = new Date(now.getFullYear() - 4, 0, 1); 
     }
 
     const transactions = await Transaction.find({
@@ -55,7 +55,7 @@ export const getDashboardData = async (req: Authrequest, res: Response) => {
 
       transactions.forEach((t) => {
         const day = new Date(t.date).getDay();
-        const index = day === 0 ? 6 : day - 1; // convert Sun → 6
+        const index = day === 0 ? 6 : day - 1;
         const key = days[index];
 
         map[key][t.type] += t.amount;

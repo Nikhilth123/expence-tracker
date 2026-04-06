@@ -4,10 +4,12 @@ import auth from './router/auth'
 import transaction from './router/transaction'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import dotenv from 'dotenv';
+dotenv.config();
 const app:Application=express();
 app.use(express.json());
 app.use(cors({
-     origin: 'http://localhost:5173',
+     origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));

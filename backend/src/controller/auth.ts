@@ -7,8 +7,7 @@ import { Authrequest } from "../middlewares/authmiddleware";
     dotenv.config();
 export const handlelogin=async(req:Request,res:Response)=>{
       const {email,password}=req.body;
-      console.log("Login Request Body:", req.body);
-      console.log('request reached here ');
+     
     if(!email||!password){
        return res.status(400).json({msg:"Enter all fields with valid credentials"});
     }
@@ -29,7 +28,7 @@ export const handlelogin=async(req:Request,res:Response)=>{
     if(!isMatch) {
         return res.status(400).json({msg:"Invalid Password"});
     }
-    console.log("jwt is :",process.env.SECRETKEY);
+    
     const token:string = jwt.sign({id:user._id},process.env.SECRETKEY as string,{expiresIn:"24h"});
     const {password:pw,...userWithoutPassword} = user.toObject();
    

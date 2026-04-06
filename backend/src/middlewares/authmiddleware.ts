@@ -14,12 +14,12 @@ export interface Authrequest extends Request{
 }
 const protect = (req:Authrequest, res:Response, next:NextFunction) => {
  const token=req.cookies.token;
- console.log("Token from cookies:", token); 
+ 
  if(!token) return res.status(401).json({ msg: "No token provided" });
     try {
      const decoded = jwt.verify(token, process.env.SECRETKEY!) as JwtPayload;
 req.user = decoded;
-   console.log("Decoded JWT payload:", decoded);
+   
       next();
     } 
     catch (err) {

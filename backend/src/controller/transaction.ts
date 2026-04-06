@@ -33,7 +33,7 @@ const id = req.user.id;
   category: temp.category,
   amount: temp.amount,
   type: temp.type,
-  date: temp.date.toISOString().split("T")[0], // optional formatting
+  date: temp.date.toISOString().split("T")[0], 
 };
 
     return res.status(200).json({
@@ -164,7 +164,7 @@ export const gettransaction = async (req: Authrequest, res: Response) => {
 
  
     const transactions = await Transaction.find(filter)
-      .sort({ date: -1 }) // latest first
+      .sort({ date: -1 }) 
       .skip(skip)
       .limit(limitNumber);
 
