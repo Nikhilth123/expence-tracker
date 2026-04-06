@@ -28,10 +28,10 @@ export default function IncomeExpenseChart({ data }: Props) {
       <LineChart data={data}>
         <XAxis dataKey="name" />
 
-        {/* ✅ Fixed YAxis */}
+      
         <YAxis width={80} tickFormatter={formatNumber} />
 
-        {/* ✅ Tooltip also formatted */}
+      
         <Tooltip formatter={(value) => formatNumber(value as number)} />
 
         <Line

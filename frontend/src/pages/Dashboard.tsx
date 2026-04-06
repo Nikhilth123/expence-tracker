@@ -41,14 +41,24 @@ type DashboardData = {
   pieData: PieData[];
 };
 import { useTransaction } from "../Hooks/usetransaction";
+import { useAuth } from "../Hooks/useauth";
+import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const{user,loading}=useAuth();
+  if(loading){
+    return<div>Loading...</div>
+  }
+  if(!user){
+    navigate('/login');
+  }
   const [range, setRange] = useState<"weekly" | "monthly" | "yearly">("monthly");
 
   const {addTransaction } = useTransaction();
-// Add Transaction Handler
+
   const handleAddTransaction = async(tx: Transaction) => {
     try{
-      const res = await fetch("http://localhost:3000/api/transaction/addtransaction", {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/addtransaction`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -58,7 +68,7 @@ export default function Dashboard() {
       });
       const data = await res.json();
       addTransaction(data.transaction);
-      console.log("Transaction added:", data);
+      
     } catch (error) {
       console.error("Error adding transaction:", error);
     }
@@ -69,10 +79,10 @@ export default function Dashboard() {
     lineData: [],
     pieData: [],
   });
- //ananlytics data fetch  
+ 
   const getanalyticsdata=async()=>{
     try{
-      const res=await fetch(`http://localhost:3000/api/transaction/dashboard?range=${range}`,{
+      const res=await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/dashboard?range=${range}`,{
         method:"GET",
         headers:{
           "Content-Type":"application/json"
@@ -92,57 +102,57 @@ export default function Dashboard() {
 
   
 
-  // 🔥 Mock Data
+  //Mock data for testing
   useEffect(() => {
     if (range === "weekly") {
       setData({
-        stats: { income: 20000, expense: 12000, balance: 8000 },
+        stats: { income: 0, expense: 0, balance: 0 },
         lineData: [
-          { name: "Mon", income: 2000, expense: 1500 },
-          { name: "Tue", income: 3000, expense: 1800 },
-          { name: "Wed", income: 2500, expense: 2000 },
-          { name: "Thu", income: 4000, expense: 2500 },
-          { name: "Fri", income: 3500, expense: 2200 },
-          { name: "Sat", income: 5000, expense: 3000 },
-          { name: "Sun", income: 4500, expense: 2800 },
+          { name: "Mon", income: 0, expense: 0 },
+          { name: "Tue", income: 0, expense: 0 },
+          { name: "Wed", income: 0, expense: 0 },
+          { name: "Thu", income: 0, expense: 0 },
+          { name: "Fri", income: 0, expense: 0 },
+          { name: "Sat", income: 0, expense: 0 },
+          { name: "Sun", income: 0, expense: 0 },
         ],
         pieData: [
-          { name: "Food", value: 3000 },
-          { name: "Rent", value: 5000 },
-          { name: "Travel", value: 2000 },
-          { name: "Shopping", value: 2000 },
+          { name: "Food", value: 0 },
+          { name: "Rent", value: 0 },
+          { name: "Travel", value: 0 },
+          { name: "Shopping", value: 0 },
         ],
       });
     } else if (range === "yearly") {
       setData({
-        stats: { income: 500000, expense: 300000, balance: 200000 },
+        stats: { income: 0, expense: 0, balance: 0 },
         lineData: [
-          { name: "2021", income: 20000, expense: 15000 },
-          { name: "2022", income: 30000, expense: 20000 },
-          { name: "2023", income: 40000, expense: 25000 },
-          { name: "2024", income: 50000, expense: 30000 },
+          { name: "2021", income: 0, expense: 0 },
+          { name: "2022", income: 0, expense: 0},
+          { name: "2023", income: 0, expense: 0 },
+          { name: "2024", income: 0, expense: 0 },
         ],
         pieData: [
-          { name: "Food", value: 80000 },
-          { name: "Rent", value: 120000 },
-          { name: "Travel", value: 60000 },
-          { name: "Shopping", value: 40000 },
+          { name: "Food", value: 80 },
+          { name: "Rent", value: 120 },
+          { name: "Travel", value: 60 },
+          { name: "Shopping", value: 40 },
         ],
       });
     } else {
       setData({
-        stats: { income: 80000, expense: 50000, balance: 30000 },
+        stats: { income: 80, expense: 50, balance: 30 },
         lineData: [
-          { name: "Jan", income: 4000, expense: 2400 },
-          { name: "Feb", income: 3000, expense: 1398 },
-          { name: "Mar", income: 5000, expense: 2800 },
-          { name: "Apr", income: 4000, expense: 3908 },
+          { name: "Jan", income: 0, expense: 0 },
+          { name: "Feb", income: 0, expense: 0 },
+          { name: "Mar", income: 0, expense: 0 },
+          { name: "Apr", income: 0, expense: 0 },
         ],
         pieData: [
-          { name: "Food", value: 15000 },
-          { name: "Rent", value: 20000 },
-          { name: "Travel", value: 8000 },
-          { name: "Shopping", value: 7000 },
+          { name: "Food", value: 0 },
+          { name: "Rent", value: 0 },
+          { name: "Travel", value:0 },
+          { name: "Shopping", value:0 },
         ],
       });
     }
@@ -172,7 +182,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
 
-      {/* Header */}
+      
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Finance Dashboard</h1>
 
@@ -196,7 +206,7 @@ export default function Dashboard() {
 
    
 
-      {/* Stats */}
+     
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
         <Card>
@@ -237,7 +247,7 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Charts */}
+     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -258,7 +268,7 @@ export default function Dashboard() {
         </Card>
       </div>
 
-         {/*  Insight Cards */}
+        
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 my-5">
 
@@ -294,13 +304,13 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Add Transaction */}
+      
       <div className="flex justify-end py-4">
         <AddTransactionModal onAdd={handleAddTransaction} />
       </div>
 
   
-      {/* Transactions */}
+     
       <div className="mt-6">
         <Card>
           <CardHeader>

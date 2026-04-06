@@ -46,7 +46,7 @@ export default function TransactionTable() {
 
   const gettransactions = async() => {
     try{
-      const res = await fetch(`http://localhost:3000/api/transaction/alltransactions?$page=${currentPage}&$limit=${10}&type=${typeFilter}&category=${search}&from=${fromDate}$to=${toDate}`, {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/alltransactions?$page=${currentPage}&$limit=${10}&type=${typeFilter}&category=${search}&from=${fromDate}$to=${toDate}`, {
         method: "GET",
         credentials: "include",
       });
@@ -74,7 +74,7 @@ export default function TransactionTable() {
     const onDelete = async(id: string) => {
       try{
         console.log("Attempting to delete transaction with ID:", id);
-        const res = await fetch(`http://localhost:3000/api/transaction/delete/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/delete/${id}`, {
           method: "DELETE",
           credentials: "include",
         });
@@ -214,14 +214,13 @@ export default function TransactionTable() {
         <Pagination>
   <PaginationContent>
 
-    {/* ⬅️ Previous */}
+   
     <PaginationItem>
       <PaginationPrevious
         onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
       />
     </PaginationItem>
 
-    {/* 🔢 Page Numbers */}
     {Array.from({ length: totalPages }, (_, i) => (
       <PaginationItem key={i}>
         <PaginationLink

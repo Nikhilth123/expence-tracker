@@ -16,8 +16,12 @@ import { useState } from "react"
 import {toast} from 'react-toastify'
 import { useAuth } from "../Hooks/useauth"
 function Login() {
-  const { setUser } = useAuth()
+  const { user,setUser } = useAuth()
   const navigate = useNavigate()
+
+  if(user){
+    navigate('/');
+  }
   
 
   const [formData, setFormData] = useState({
@@ -57,6 +61,7 @@ function Login() {
       const data = await res.json()
 
       if (!res.ok) {
+        console.log("Login failed:", data);
         toast(data.msg)
         
         return;
@@ -69,6 +74,7 @@ function Login() {
       navigate("/")
     } catch (err) {
         if (err instanceof Error) {
+          console.error("Login error:", err);
     toast(err.message);
   } else {
     toast("Something went wrong");
@@ -91,7 +97,7 @@ function Login() {
           </CardDescription>
         </CardHeader>
 
-        {/* FORM */}
+        
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
 

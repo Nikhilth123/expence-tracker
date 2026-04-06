@@ -15,9 +15,11 @@ import {useState } from "react"
 import {toast} from 'react-toastify'
 import { useAuth } from "../Hooks/useauth"
 function Signup() {
-   const { setUser } = useAuth()
-  const navigate = useNavigate()
- 
+   const {user} = useAuth();
+  const navigate = useNavigate();
+  if(user){
+    navigate('/');
+  }
 
   const [formData, setFormData] = useState({
     name: "",
@@ -61,11 +63,11 @@ function Signup() {
         return
       }
 
-      setUser(data.user)
+     
 
       toast('Account Created successfully')
 
-      navigate("/")
+      navigate("/login")
     } catch (err) {
      if (err instanceof Error) {
     toast(err.message);
@@ -86,11 +88,11 @@ function Signup() {
             Create an account
           </CardTitle>
           <CardDescription>
-            Sign up to start solving coding problems
+            Sign up for tacking your expenses and managing your finances effectively.
           </CardDescription>
         </CardHeader>
 
-        {/* FORM */}
+        
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
 

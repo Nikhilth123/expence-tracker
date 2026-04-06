@@ -33,7 +33,7 @@ export default function AddTransactionModal({ onAdd }: Props) {
   const [category, setCategory] = useState("");
   const [type, setType] = useState<"income" | "expense">("expense");
   const [date, setDate] = useState("");
-
+const [open, setOpen] = useState(false);
   const handleSubmit = () => {
     if (!amount || !category || !date) return;
 
@@ -46,17 +46,18 @@ export default function AddTransactionModal({ onAdd }: Props) {
 
     onAdd(newTx);
 
-    // reset form
+   
     setAmount("");
     setCategory("");
     setDate("");
     setType("expense");
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Add Transaction</Button>
+        <Button onClick={()=>setOpen(true)}>Add Transaction</Button>
       </DialogTrigger>
 
       <DialogContent>

@@ -1,14 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "@/Hooks/useauth";
 const Home = () => {
   const navigate = useNavigate();
-
+const { user,loading} = useAuth();
+if(loading) {
+    return <div className="flex items-center justify-center h-screen">
+    Loading...
+  </div>
+}
+  
+  if (user) {
+    navigate("/dashboard");
+  }
   return (
     <div className="w-full">
 
-      {/* 🎯 HERO */}
       <section className="text-center py-24 px-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white dark:from-blue-700 dark:to-indigo-900">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
           Take Control of Your Finances 💰
@@ -20,13 +28,14 @@ const Home = () => {
         </p>
 
         <div className="flex justify-center gap-4 flex-wrap">
-          <Button
+          {!user&&<Button
             size="lg"
             className="bg-white text-blue-600 hover:bg-gray-100 transition-all duration-200 hover:scale-105 active:scale-95"
             onClick={() => navigate("/signup")}
           >
             Get Started
           </Button>
+}
 
          <Button
   size="lg"
@@ -40,7 +49,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ⭐ FEATURES */}
+      
       <section className="py-20 px-6 bg-background text-foreground">
         <h2 className="text-3xl font-bold text-center mb-12">
           Why Choose ExpenseTracker?
@@ -84,7 +93,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ⚙️ HOW IT WORKS */}
+   
       <section className="py-20 px-6 bg-muted text-center">
         <h2 className="text-3xl font-bold mb-12">
           How It Works
@@ -119,7 +128,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 🚀 CTA */}
       <section className="py-20 px-6 text-center bg-background">
         <h2 className="text-3xl font-bold mb-4">
           Start Managing Your Money Today 🚀
@@ -129,13 +137,14 @@ const Home = () => {
           Join now and take full control of your finances.
         </p>
 
-        <Button
+       {!user && <Button
           size="lg"
           className="transition-all duration-200 hover:scale-105 active:scale-95"
           onClick={() => navigate("/signup")}
         >
           Get Started Free
         </Button>
+        }
       </section>
 
 
