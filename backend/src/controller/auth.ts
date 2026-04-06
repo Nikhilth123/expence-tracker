@@ -64,8 +64,8 @@ export const handlesignup=async(req:Request,res:Response)=>{
         password:hashedPassword,
     })
     await newuser.save();
-    const {password:pw,...userWithoutPassword} = newuser.toObject();    
-    res.status(201).json({user:userWithoutPassword, msg: "User created successfully" });
+   
+    res.status(201).json({success:true,msg: "User created successfully" });
 
 }
 export const handlelogout=async(req:Request,res:Response)=>{
