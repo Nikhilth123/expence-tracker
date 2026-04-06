@@ -46,10 +46,16 @@ export default function TransactionTable() {
 
   const gettransactions = async() => {
     try{
-      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/alltransactions?$page=${currentPage}&$limit=${10}&type=${typeFilter}&category=${search}&from=${fromDate}$to=${toDate}`, {
-        method: "GET",
-        credentials: "include",
-      });
+     const res = await fetch(
+  `${import.meta.env.VITE_BASE_URL}/api/transaction/alltransactions?page=${currentPage}&limit=10&type=${typeFilter}&category=${search}&from=${fromDate}&to=${toDate}`,
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
+);
       if (!res.ok) {
         throw new Error("Failed to fetch transactions");
       }
@@ -66,18 +72,27 @@ export default function TransactionTable() {
       console.error("Error fetching transactions:", error);
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
+  const delay = setTimeout(() => {
     gettransactions();
-  },[search, typeFilter, fromDate, toDate, currentPage]);
+  }, 300);
+
+  return () => clearTimeout(delay);
+}, [search, typeFilter, fromDate, toDate, currentPage]);
  
     //delete transaction handler  
     const onDelete = async(id: string) => {
       try{
         console.log("Attempting to delete transaction with ID:", id);
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/delete/${id}`, {
-          method: "DELETE",
-          credentials: "include",
-        });
+        const res = await fetch( `${import.meta.env.VITE_BASE_URL}/api/transaction/delete/${id}`,
+  {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`, 
+    },
+  }
+);
         if (!res.ok) {
           throw new Error("Failed to delete transaction");
         } else {   

@@ -7,22 +7,7 @@ import {
 } from "./transactioncontext";
 
 export const TransactionProvider = ({ children }: any) => {
-  const [transactions, setTransactions] = useState<Transaction[]>([
-    {
-      id: "1",
-      date: "2026-04-01",
-      category: "Food",
-      type: "expense",
-      amount: 500,
-    },
-    {
-      id: "2",
-      date: "2026-04-02",
-      category: "Salary",
-      type: "income",
-      amount: 20000,
-    },
-  ]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
  
   const addTransaction = (tx: Transaction) => {
@@ -31,8 +16,10 @@ export const TransactionProvider = ({ children }: any) => {
 
   
   const deleteTransaction = (id: string) => {
-    setTransactions((prev) => prev.filter((t) => t.id !== id));
-  };
+  setTransactions((prev) =>
+    prev.filter((t: any) => (t.id || t._id) !== id)
+  );
+};
 
  
   const setAllTransactions = (txs: Transaction[]) => {

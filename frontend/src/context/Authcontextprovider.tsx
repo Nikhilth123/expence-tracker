@@ -18,18 +18,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const fetchuser = async () => {
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/user/me`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+     const res = await fetch(
+  `${import.meta.env.VITE_BASE_URL}/api/user/me`,
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
+);
 
       if (res.ok) {
         const data = await res.json();
 
-        // ✅ Make sure backend sends { user: {...} }
+       
         setUser({
           _id: data.user._id,
           name: data.user.name,

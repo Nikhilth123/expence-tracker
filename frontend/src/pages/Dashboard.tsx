@@ -64,9 +64,9 @@ export default function Dashboard() {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/addtransaction`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        credentials: "include",
         body: JSON.stringify(tx)
       });
       const data = await res.json();
@@ -88,9 +88,9 @@ export default function Dashboard() {
       const res=await fetch(`${import.meta.env.VITE_BASE_URL}/api/transaction/dashboard?range=${range}`,{
         method:"GET",
         headers:{
-          "Content-Type":"application/json"
+          "Content-Type":"application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         },
-        credentials:"include"
       });
       const data=await res.json();
       console.log("Analytics Data:",data);

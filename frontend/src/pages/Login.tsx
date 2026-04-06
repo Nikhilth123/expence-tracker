@@ -66,7 +66,7 @@ function Login() {
         
         return;
       }
-
+      localStorage.setItem("token", data.token);
       setUser(data.user)
 
       toast('logged in successfully')
