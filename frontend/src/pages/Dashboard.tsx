@@ -71,7 +71,7 @@ export default function Dashboard() {
       });
       const data = await res.json();
       addTransaction(data.transaction);
-      
+navigate('/dashboard');
     } catch (error) {
       console.error("Error adding transaction:", error);
     }
