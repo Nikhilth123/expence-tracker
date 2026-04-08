@@ -6,22 +6,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { trackEvent } from "@/utils/analytics"
 import React from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
-
+import { useEffect } from "react";
 import {toast} from 'react-toastify'
 import { useAuth } from "../Hooks/useauth"
 function Login() {
   const { user,setUser } = useAuth()
   const navigate = useNavigate()
 
-  if(user){
-    navigate('/');
+ 
+
+useEffect(() => {
+  if (user) {
+    navigate("/");
   }
+}, [user]);
   
 
   const [formData, setFormData] = useState({
@@ -63,14 +68,20 @@ function Login() {
       if (!res.ok) {
         console.log("Login failed:", data);
         toast(data.msg)
-        
+        trackEvent({
+          category: "User",
+          action: "Login Error",
+        });
         return;
       }
       localStorage.setItem("token", data.token);
       setUser(data.user)
 
       toast('logged in successfully')
-
+      trackEvent({
+        category: "User",
+        action: "Logged in",
+      });
       navigate("/")
     } catch (err) {
         if (err instanceof Error) {

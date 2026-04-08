@@ -5,10 +5,12 @@
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ProtectedRoute from './utils/Protectedroute'
+import TrackPage from './utils/Trackpage'
 function App() {
  return(
 <>
 <BrowserRouter>
+ <TrackPage></TrackPage>
 <Routes>
   <Route element={<Mainlayout></Mainlayout>}>
   <Route path='/' element={<Home></Home>}></Route>
@@ -18,6 +20,7 @@ function App() {
   <Route path='/login' element={<Login></Login>}></Route>
   <Route path='/signup' element={<Signup></Signup>}></Route>
 </Routes>
+
 </BrowserRouter>
 </>
   )

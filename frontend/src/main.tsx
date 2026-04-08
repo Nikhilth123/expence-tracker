@@ -7,7 +7,12 @@ import { AuthProvider } from './context/Authcontextprovider.tsx'
 import { TransactionProvider } from './context/Transactioncontextprovider.tsx'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize(import.meta.env.VITE_GA_MEASUREMENT_ID);
+
 createRoot(document.getElementById('root')!).render(
+  
   <StrictMode>
     <AuthProvider>
       <TransactionProvider>

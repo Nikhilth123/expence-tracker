@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import AddTransactionModal from "../components/AddTransactionModel";
 import { IndianRupee, TrendingUp, Wallet } from "lucide-react";
-
+import { trackEvent } from "@/utils/analytics";
 type Transaction = {
   date: string;
   category: string;
@@ -72,6 +72,11 @@ export default function Dashboard() {
       const data = await res.json();
       addTransaction(data.transaction);
 await getanalyticsdata();
+trackEvent({
+  category: "Transaction",
+  action: "Added a new transaction",
+});
+
     } catch (error) {
       console.error("Error adding transaction:", error);
     }

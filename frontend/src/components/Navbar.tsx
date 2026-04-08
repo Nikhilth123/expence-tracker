@@ -46,7 +46,7 @@ const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
           
          
@@ -55,7 +55,7 @@ const navigate = useNavigate();
               <span className="text-white font-bold text-lg">$</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white cursor-pointer" onClick={()=>navigate('/')}>
                 Finance Dashboard
               </h1>
               <p className="text-sm text-slate-500 dark:text-slate-400">

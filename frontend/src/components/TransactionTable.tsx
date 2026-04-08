@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Trash2 } from "lucide-react";
-
+import { trackEvent } from "@/utils/analytics";
 
 import { useTransaction } from "../Hooks/usetransaction";
 export default function TransactionTable({ refreshAnalytics }: any) {
@@ -100,6 +100,10 @@ export default function TransactionTable({ refreshAnalytics }: any) {
           console.log(data);
           deleteTransaction(id);
           await refreshAnalytics();
+          trackEvent({
+            category: "Transaction",
+            action: "Deleted a transaction",
+          });
                  console.log("Transaction deleted successfully");
         }
       }
