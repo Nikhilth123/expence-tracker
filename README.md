@@ -1,4 +1,4 @@
-# 💰 Expense Tracker (Full Stack)
+# 💰 Expense Tracker 
 
 A full-stack Expense Tracker web application that helps users manage income and expenses with secure authentication, visual analytics, and a clean modern UI.
 
