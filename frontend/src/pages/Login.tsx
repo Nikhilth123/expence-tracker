@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { trackEvent } from "@/utils/analytics"
+
 import React from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -68,20 +68,14 @@ useEffect(() => {
       if (!res.ok) {
         console.log("Login failed:", data);
         toast(data.msg)
-        trackEvent({
-          category: "User",
-          action: "Login Error",
-        });
+       
         return;
       }
       localStorage.setItem("token", data.token);
       setUser(data.user)
 
       toast('logged in successfully')
-      trackEvent({
-        category: "User",
-        action: "Logged in",
-      });
+      
       navigate("/")
     } catch (err) {
         if (err instanceof Error) {
