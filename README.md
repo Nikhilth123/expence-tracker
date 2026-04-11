@@ -82,23 +82,25 @@ Expense-Tracker/
 ```
 
 ⚙️ How It Works
-Authentication: User signs up or logs in. Authentication is handled securely using backend APIs and custom middleware.
 
-Dashboard Access: Once authenticated, users can add new transactions, view their current balance, and check overall statistics.
+- Authentication: User signs up or logs in. Authentication is handled securely using backend APIs and custom middleware.
 
-Data Analysis: Users can analyze their spending habits through interactive charts.
+- Dashboard Access: Once authenticated, users can add new transactions, view their current balance, and check overall statistics.
 
-Data Storage: All transaction and user data is stored securely in MongoDB.
+- Data Analysis: Users can analyze their spending habits through interactive charts.
 
-State Management: The frontend updates the UI in real-time using React's Context API.
+- Data Storage: All transaction and user data is stored securely in MongoDB.
+
+- State Management: The frontend updates the UI in real-time using React's Context API.
 
 
 📦 Installation & Setup
 1. Clone the Repository
+ ```
 git clone [https://github.com/your-username/expense-tracker.git](https://github.com/your-username/expense-tracker.git)
 cd expense-tracker
-
-2. Backend Setup
+```
+3. Backend Setup
 Navigate to the backend directory and install dependencies:
 ```
 cd backend
