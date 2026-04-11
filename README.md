@@ -97,7 +97,7 @@ Expense-Tracker/
 📦 Installation & Setup
 1. Clone the Repository
  ```
-git clone [https://github.com/your-username/expense-tracker.git](https://github.com/your-username/expense-tracker.git)
+git clone https://github.com/Nikhilth123/expense-tracker.git
 cd expense-tracker
 ```
 3. Backend Setup
